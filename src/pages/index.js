@@ -1,4 +1,6 @@
 import Login from "./Login";
 import LoginAdmin from "./Admin/LoginAdmin";
+import AdminHome from "./Admin/Dashboard";
+import AdminCandidates from "./Admin/Candidates";
 
-export { Login, LoginAdmin };
+export { Login, LoginAdmin, AdminHome, AdminCandidates };

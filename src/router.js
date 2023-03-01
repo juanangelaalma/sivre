@@ -1,12 +1,7 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import { Login, LoginAdmin } from "./pages";
+import { createBrowserRouter, Link } from "react-router-dom";
+import { AdminCandidates, AdminHome, Login, LoginAdmin } from "./pages";
+import LogoutAdmin from "./pages/Admin/LogoutAdmin";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +24,18 @@ const router = createBrowserRouter([
   {
     path: "admin/login",
     element: <LoginAdmin />,
+  },
+  {
+    path: "admin/dashboard",
+    element: <AdminHome />,
+  },
+  {
+    path: "admin/candidates",
+    element: <AdminCandidates />,
+  },
+  {
+    path: "admin/logout",
+    element: <LogoutAdmin />,
   },
 ]);
 
