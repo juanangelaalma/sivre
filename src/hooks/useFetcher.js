@@ -17,19 +17,19 @@ const axiosInterceptor = (userData) => {
 const useFetcher = () => {
   const [userData, setUserData] = useLocalStorage("userData");
 
-  const fetcher = async (url, config) => {
-    let headers = {
+  const fetcher = async (url, config, body) => {
+    let configs = {
       ...config,
       url,
       headers: {
-        "Content-Type": "application/json",
         ...config?.headers,
       },
+      data: body,
     };
 
     try {
       axiosInterceptor(userData);
-      let res = await axios.request(headers);
+      let res = await axios.request(configs);
       return res;
     } catch (err) {
       throw err?.response;

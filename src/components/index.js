@@ -4,5 +4,18 @@ import Paragraph from "./Paragraph";
 import FormInput from "./FormInput";
 import PrimaryButton from "./PrimaryButton";
 import Spinner from "./Spinner";
+import CandateModal from "./CandateModal";
+import LoaderButton from "./LoaderButton";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
-export { Heading, Title, Paragraph, FormInput, PrimaryButton, Spinner };
+export {
+  Heading,
+  Title,
+  Paragraph,
+  FormInput,
+  PrimaryButton,
+  Spinner,
+  CandateModal,
+  LoaderButton,
+  DeleteConfirmModal,
+};
