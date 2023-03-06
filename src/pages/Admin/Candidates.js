@@ -81,9 +81,6 @@ const Candidates = () => {
                 Chairman
               </th>
               <th scope="col" className="px-6 py-4 font-medium text-gray-900">
-                Vice Chairman
-              </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
                 Vision
               </th>
               <th scope="col" className="px-6 py-4 font-medium text-gray-900">
@@ -115,38 +112,27 @@ const Candidates = () => {
                       />
                       <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white" />
                     </div>
-                    <div className="text-sm">
-                      <div className="font-medium text-gray-700">
+                    <div className="text-sm flex items-center md:block">
+                      <div className="font-medium text-gray-700 truncate">
                         {candidate.chairman_name}
                       </div>
-                      <div className="text-gray-400">additional info</div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-3">
-                      <div className="relative h-10 w-10">
-                        <img
-                          className="h-full w-full rounded-full object-cover object-center"
-                          src={candidate.vice_chairman_photo}
-                          alt=""
-                        />
-                        <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white" />
-                      </div>
-                      <div className="text-sm">
-                        <div className="font-medium text-gray-700">
-                          {candidate.vice_chairman_name}
-                        </div>
-                        <div className="text-gray-400">additional info</div>
+                      <div className="text-gray-400 hidden md:block truncate">
+                        additional info
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 truncate">
                     {truncate(candidate.vision)}
                   </td>
-                  <td className="px-6 py-4">{truncate(candidate.mission)}</td>
+                  <td className="px-6 py-4 truncate">
+                    {truncate(candidate.mission)}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex justify-end gap-4">
-                      <button onClick={() => handleOpenModalDelete(candidate)}>
+                      <button
+                        onClick={() => handleOpenModalDelete(candidate)}
+                        className="cursor-pointer"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
