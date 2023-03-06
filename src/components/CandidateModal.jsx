@@ -5,7 +5,13 @@ import useFetcher from "../hooks/useFetcher";
 import { API_URL } from "../configs/api";
 import LoaderButton from "./LoaderButton";
 
-const CandateModal = ({ isOpen, closeModal, refresh }) => {
+const CandidateModal = ({
+  isOpen,
+  closeModal,
+  refresh,
+  handleSendData,
+  selectedCandidate,
+}) => {
   const [chairmanName, setChairmanName] = useState("");
   const [vision, setVision] = useState("");
   const [mission, setMission] = useState("");
@@ -19,34 +25,19 @@ const CandateModal = ({ isOpen, closeModal, refresh }) => {
     formData.append("chairman_name", chairmanName);
     formData.append("vision", vision);
     formData.append("mission", mission);
-    console.log("chairmanPhoto", chairmanPhoto);
     if (chairmanPhoto) formData.append("chairman_photo", chairmanPhoto);
     return formData;
-  };
-
-  const handlePostNewCandidate = async (newCandidate) => {
-    try {
-      const response = await fetcher(
-        `${API_URL}/candidates`,
-        {
-          method: "POST",
-          "Content-Type": "multipart/form-data",
-        },
-        newCandidate
-      );
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newCandidate = createFormData();
+    console.log(chairmanName, vision, mission, chairmanPhoto);
     setLoading(true);
-    await handlePostNewCandidate(newCandidate);
+    await handleSendData(newCandidate);
+    resetInput();
     setLoading(false);
     closeModal();
-    resetInput();
     refresh();
   };
 
@@ -56,16 +47,31 @@ const CandateModal = ({ isOpen, closeModal, refresh }) => {
   };
 
   useEffect(() => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      profilePicture.current.src = reader.result;
-    };
-    if (chairmanPhoto) {
-      reader.readAsDataURL(chairmanPhoto);
+    if (selectedCandidate && !chairmanPhoto) {
+      profilePicture.current.src = selectedCandidate.chairman_photo;
     } else {
-      profilePicture.current.src = defaultProfilePicture;
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        profilePicture.current.src = reader.result;
+      };
+      if (chairmanPhoto) {
+        reader.readAsDataURL(chairmanPhoto);
+      } else {
+        profilePicture.current.src = defaultProfilePicture;
+      }
     }
-  }, [chairmanPhoto]);
+  }, [chairmanPhoto, selectedCandidate]);
+
+  useEffect(() => {
+    if (selectedCandidate) {
+      setChairmanName(selectedCandidate.chairman_name);
+      setVision(selectedCandidate.vision);
+      setMission(selectedCandidate.mission);
+    }
+    return () => {
+      resetInput();
+    };
+  }, [selectedCandidate]);
 
   const resetInput = () => {
     setChairmanName("");
@@ -199,4 +205,4 @@ const CandateModal = ({ isOpen, closeModal, refresh }) => {
   );
 };
 
-export default CandateModal;
+export default CandidateModal;

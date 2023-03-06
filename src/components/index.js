@@ -4,7 +4,7 @@ import Paragraph from "./Paragraph";
 import FormInput from "./FormInput";
 import PrimaryButton from "./PrimaryButton";
 import Spinner from "./Spinner";
-import CandateModal from "./CandateModal";
+import CandidateModal from "./CandidateModal";
 import LoaderButton from "./LoaderButton";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 
@@ -15,7 +15,7 @@ export {
   FormInput,
   PrimaryButton,
   Spinner,
-  CandateModal,
+  CandidateModal,
   LoaderButton,
   DeleteConfirmModal,
 };

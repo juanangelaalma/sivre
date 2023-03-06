@@ -3,7 +3,7 @@ import useFetcher from "../../hooks/useFetcher";
 import AdminLayout from "../../components/AdminLayout";
 import { API_URL } from "../../configs/api";
 import {
-  CandateModal,
+  CandidateModal,
   DeleteConfirmModal,
   PrimaryButton,
   Spinner,
@@ -46,9 +46,42 @@ const Candidates = () => {
         method: "DELETE",
       });
       getCandidates();
+      setSelectedCandidate(null);
     } catch (err) {
       setError("something error");
     }
+  };
+
+  const handleSendData = async (newCandidate) => {
+    const headers = {
+      method: "POST",
+      "Content-Type": "multipart/form-data",
+    };
+
+    try {
+      if (selectedCandidate) {
+        await fetcher(
+          `${API_URL}/candidates/${selectedCandidate.id}?_method=PUT`,
+          headers,
+          newCandidate
+        );
+      } else {
+        await fetcher(`${API_URL}/candidates`, headers, newCandidate);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleEditCandidate = (candidate) => {
+    console.log(candidate);
+    setSelectedCandidate(candidate);
+    setModalIsOpen(true);
+  };
+
+  const handleCreateCandidate = () => {
+    setSelectedCandidate(null);
+    setModalIsOpen(true);
   };
 
   useEffect(() => {
@@ -57,9 +90,11 @@ const Candidates = () => {
 
   return (
     <AdminLayout>
-      <CandateModal
+      <CandidateModal
         refresh={getCandidates}
         isOpen={modalIsOpen}
+        handleSendData={handleSendData}
+        selectedCandidate={selectedCandidate}
         closeModal={() => setModalIsOpen(false)}
       />
       <DeleteConfirmModal
@@ -69,7 +104,7 @@ const Candidates = () => {
       />
       {/* component */}
       <div className="w-1/2 sm:w-1/3 md:w-1/4">
-        <PrimaryButton onClick={() => setModalIsOpen(true)}>
+        <PrimaryButton onClick={handleCreateCandidate}>
           + Add Candidate
         </PrimaryButton>
       </div>
@@ -149,7 +184,7 @@ const Candidates = () => {
                           />
                         </svg>
                       </button>
-                      <a x-data="{ tooltip: 'Edite' }" href="#">
+                      <button onClick={() => handleEditCandidate(candidate)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -165,7 +200,7 @@ const Candidates = () => {
                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
                           />
                         </svg>
-                      </a>
+                      </button>
                     </div>
                   </td>
                 </tr>
