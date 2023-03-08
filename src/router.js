@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter, Link } from "react-router-dom";
+import AdminMiddleware from "./middlewares/AdminMiddleware";
 import {
   AdminCandidates,
   AdminHome,
@@ -33,19 +34,19 @@ const router = createBrowserRouter([
   },
   {
     path: "admin/dashboard",
-    element: <AdminHome />,
+    element: <AdminMiddleware><AdminHome /></AdminMiddleware>,
   },
   {
     path: "admin/candidates",
-    element: <AdminCandidates />,
+    element: <AdminMiddleware><AdminCandidates /></AdminMiddleware>,
   },
   {
     path: "admin/voters",
-    element: <AdminVoters />,
+    element: <AdminMiddleware><AdminVoters /></AdminMiddleware>,
   },
   {
     path: "admin/logout",
-    element: <LogoutAdmin />,
+    element: <AdminMiddleware><LogoutAdmin /></AdminMiddleware>,
   },
 ]);
 
