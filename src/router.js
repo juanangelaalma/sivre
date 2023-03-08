@@ -1,6 +1,12 @@
 import React from "react";
 import { createBrowserRouter, Link } from "react-router-dom";
-import { AdminCandidates, AdminHome, Login, LoginAdmin } from "./pages";
+import {
+  AdminCandidates,
+  AdminHome,
+  AdminVoters,
+  Login,
+  LoginAdmin,
+} from "./pages";
 import LogoutAdmin from "./pages/Admin/LogoutAdmin";
 
 const router = createBrowserRouter([
@@ -32,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "admin/candidates",
     element: <AdminCandidates />,
+  },
+  {
+    path: "admin/voters",
+    element: <AdminVoters />,
   },
   {
     path: "admin/logout",

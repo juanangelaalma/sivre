@@ -74,7 +74,6 @@ const Candidates = () => {
   };
 
   const handleEditCandidate = (candidate) => {
-    console.log(candidate);
     setSelectedCandidate(candidate);
     setModalIsOpen(true);
   };

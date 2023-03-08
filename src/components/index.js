@@ -7,6 +7,7 @@ import Spinner from "./Spinner";
 import CandidateModal from "./CandidateModal";
 import LoaderButton from "./LoaderButton";
 import DeleteConfirmModal from "./DeleteConfirmModal";
+import VoterModal from "./VoterModal";
 
 export {
   Heading,
@@ -18,4 +19,5 @@ export {
   CandidateModal,
   LoaderButton,
   DeleteConfirmModal,
+  VoterModal,
 };
