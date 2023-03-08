@@ -64,7 +64,7 @@ const LoginAdmin = () => {
             <li />
           </ul>
         </div>
-        <div className="md:flex md:items-center md:justify-center sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
+        <div className="md:flex md:items-center md:justify-center sm:w-auto md:h-full w-full xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <Title>Welcome!</Title>
