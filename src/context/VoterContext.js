@@ -18,7 +18,7 @@ function useVoter() {
 
 function VoterProvider(props) {
   const [voterData, setVoterData] = useState(VoterData);
-  const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterDataStorage", null);
+  const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterData", null);
 
   useEffect(() => {
     if (voterDataStorage) {
