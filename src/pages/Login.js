@@ -1,18 +1,34 @@
-import React, { useState } from "react";
-import { FormInput, Heading, PrimaryButton, Title } from "../components";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FormInput, Heading, LoaderButton, PrimaryButton, Title } from "../components";
 import Paragraph from "../components/Paragraph";
+import { useVoter } from "../context/VoterContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const login = (e) => {
-    e.preventDefault();
-    alert(`${username} ${password}`);
-  };
+  const { login, voterData } = useVoter()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    await login({ username, password })
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    console.log(voterData)
+  }, [voterData])
+
+  if(voterData.isValid) {
+    navigate("/");
+  }
 
   return (
-    <div className="relative min-h-screen flex ">
+    <div className="relative min-h-screen flex">
       <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
         <div
           className="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"
@@ -50,6 +66,9 @@ const Login = () => {
               <Paragraph className="mt-2">
                 Silahkan login menggunakan kradential anda
               </Paragraph>
+              {voterData.error && (
+                <div className="text-red-500">{voterData.error}</div>
+              )}
             </div>
             <div className="flex items-center justify-center space-x-2">
               <span className="h-px w-16 bg-gray-200" />
@@ -59,7 +78,7 @@ const Login = () => {
               <span className="h-px w-16 bg-gray-200" />
             </div>
             <form
-              onSubmit={login}
+              onSubmit={handleSubmit}
               className="mt-8 space-y-6"
               action="#"
               method="POST"
@@ -84,7 +103,9 @@ const Login = () => {
                 onChange={setPassword}
               />
               <div>
-                <PrimaryButton type="submit">Login</PrimaryButton>
+                <PrimaryButton type="submit">
+                  { loading ? <LoaderButton /> : "Login" }
+                </PrimaryButton>
               </div>
               <p className="flex space-x-1 flex-row items-center w-full justify-center mt-10 text-center text-md text-gray-500">
                 <Paragraph>Built by Remas Elmuna with</Paragraph>
