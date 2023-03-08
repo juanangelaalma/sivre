@@ -1,10 +1,12 @@
 import React from "react";
 import { createBrowserRouter, Link } from "react-router-dom";
 import AdminMiddleware from "./middlewares/AdminMiddleware";
+import VoterMiddleware from "./middlewares/VoterMiddleware";
 import {
   AdminCandidates,
   AdminHome,
   AdminVoters,
+  Home,
   Login,
   LoginAdmin,
 } from "./pages";
@@ -13,12 +15,7 @@ import LogoutAdmin from "./pages/Admin/LogoutAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <div>
-        <h1>Hello world</h1>
-        <Link to="about">About us</Link>
-      </div>
-    ),
+    element: <VoterMiddleware><Home /></VoterMiddleware>,
   },
   {
     path: "about",

@@ -4,4 +4,6 @@ import AdminHome from "./Admin/Dashboard";
 import AdminCandidates from "./Admin/Candidates";
 import AdminVoters from "./Admin/Voters";
 
-export { Login, LoginAdmin, AdminHome, AdminCandidates, AdminVoters };
+import Home from "./Home";
+
+export { Login, LoginAdmin, AdminHome, AdminCandidates, AdminVoters, Home };
