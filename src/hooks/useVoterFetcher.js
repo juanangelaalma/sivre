@@ -6,17 +6,17 @@ axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common["Accept"] = "application/json";
 
 const generateBody = (body, voterData) => {
-  if(voterData.isValid) {
+  if (voterData) {
     return {
       ...body,
       voter: {
-        "username": voterData.username,
-        "password": voterData.password,
-      }
-    }
+        username: voterData.username,
+        password: voterData.password,
+      },
+    };
   }
   return body;
-}
+};
 
 const useVoterFetcher = () => {
   const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterData");
@@ -29,7 +29,7 @@ const useVoterFetcher = () => {
         ...config?.headers,
       },
       data: generateBody(body, voterDataStorage),
-    }
+    };
 
     try {
       const res = await axios.request(configs);
@@ -37,9 +37,9 @@ const useVoterFetcher = () => {
     } catch (err) {
       throw err?.response;
     }
-  }
+  };
 
   return voterFetcher;
-}
+};
 
 export default useVoterFetcher;

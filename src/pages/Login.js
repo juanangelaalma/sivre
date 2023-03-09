@@ -24,11 +24,7 @@ const Login = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    console.log(voterData);
-  }, [voterData]);
-
-  if (voterData) {
+  if (voterData.isValid) {
     return <Navigate to="/" />;
   }
 

@@ -4,9 +4,9 @@ import { useVoter } from "../context/VoterContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const VoterMiddleware = (props) => {
-  const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterData");
+  const { voterData } = useVoter();
 
-  if (!voterDataStorage) {
+  if (!voterData.isValid) {
     return <Navigate to="/login" />;
   }
 

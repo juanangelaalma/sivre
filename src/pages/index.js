@@ -6,4 +6,11 @@ import AdminVoters from "./Admin/Voters";
 
 import Home from "./Home";
 
-export { Login, LoginAdmin, AdminHome, AdminCandidates, AdminVoters, Home };
+export {
+  Login,
+  LoginAdmin,
+  AdminHome,
+  AdminCandidates,
+  AdminVoters,
+  Home,
+};

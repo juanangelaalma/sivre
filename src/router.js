@@ -9,13 +9,18 @@ import {
   Home,
   Login,
   LoginAdmin,
+  Logout,
 } from "./pages";
 import LogoutAdmin from "./pages/Admin/LogoutAdmin";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <VoterMiddleware><Home /></VoterMiddleware>,
+    element: (
+      <VoterMiddleware>
+        <Home />
+      </VoterMiddleware>
+    ),
   },
   {
     path: "about",
@@ -31,19 +36,35 @@ const router = createBrowserRouter([
   },
   {
     path: "admin/dashboard",
-    element: <AdminMiddleware><AdminHome /></AdminMiddleware>,
+    element: (
+      <AdminMiddleware>
+        <AdminHome />
+      </AdminMiddleware>
+    ),
   },
   {
     path: "admin/candidates",
-    element: <AdminMiddleware><AdminCandidates /></AdminMiddleware>,
+    element: (
+      <AdminMiddleware>
+        <AdminCandidates />
+      </AdminMiddleware>
+    ),
   },
   {
     path: "admin/voters",
-    element: <AdminMiddleware><AdminVoters /></AdminMiddleware>,
+    element: (
+      <AdminMiddleware>
+        <AdminVoters />
+      </AdminMiddleware>
+    ),
   },
   {
     path: "admin/logout",
-    element: <AdminMiddleware><LogoutAdmin /></AdminMiddleware>,
+    element: (
+      <AdminMiddleware>
+        <LogoutAdmin />
+      </AdminMiddleware>
+    ),
   },
 ]);
 
