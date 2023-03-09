@@ -8,6 +8,7 @@ import CandidateModal from "./CandidateModal";
 import LoaderButton from "./LoaderButton";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import VoterModal from "./VoterModal";
+import CandidateCard from "./CandidateCard";
 
 export {
   Heading,
@@ -20,4 +21,5 @@ export {
   LoaderButton,
   DeleteConfirmModal,
   VoterModal,
+  CandidateCard,
 };
