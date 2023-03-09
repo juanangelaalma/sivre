@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FormInput, Heading, LoaderButton, PrimaryButton, Title } from "../components";
+import { Navigate, useNavigate } from "react-router-dom";
+import {
+  FormInput,
+  Heading,
+  LoaderButton,
+  PrimaryButton,
+  Title,
+} from "../components";
 import Paragraph from "../components/Paragraph";
 import { useVoter } from "../context/VoterContext";
 
@@ -8,23 +14,22 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  const { login, voterData } = useVoter()
+  const { login, voterData } = useVoter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    await login({ username, password })
-    setLoading(false)
-  }
+    e.preventDefault();
+    setLoading(true);
+    await login({ username, password });
+    setLoading(false);
+  };
 
   useEffect(() => {
-    console.log(voterData)
-  }, [voterData])
+    console.log(voterData);
+  }, [voterData]);
 
-  if(voterData.isValid) {
-    navigate("/");
+  if (voterData) {
+    return <Navigate to="/" />;
   }
 
   return (
@@ -104,7 +109,7 @@ const Login = () => {
               />
               <div>
                 <PrimaryButton type="submit">
-                  { loading ? <LoaderButton /> : "Login" }
+                  {loading ? <LoaderButton /> : "Login"}
                 </PrimaryButton>
               </div>
               <p className="flex space-x-1 flex-row items-center w-full justify-center mt-10 text-center text-md text-gray-500">

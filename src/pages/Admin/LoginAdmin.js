@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   FormInput,
   Heading,
@@ -29,7 +29,7 @@ const LoginAdmin = () => {
   };
 
   if (authData.isAuth) {
-    navigate("/admin/dashboard");
+    return <Navigate to="/admin/dashboard" />;
   }
 
   return (

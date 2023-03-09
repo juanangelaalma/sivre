@@ -1,15 +1,16 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom'
-import { useVoter } from '../context/VoterContext'
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useVoter } from "../context/VoterContext";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const VoterMiddleware = (props) => {
-  const { voterData } = useVoter()
+  const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterData");
 
-  if (!voterData.isValid) {
-    return <Navigate to="/login" />
+  if (!voterDataStorage) {
+    return <Navigate to="/login" />;
   }
 
-  return <>{props.children}</>
-}
+  return <>{props.children}</>;
+};
 
-export default VoterMiddleware
+export default VoterMiddleware;
