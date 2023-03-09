@@ -3,18 +3,17 @@ import ProfileDropdown from "./ProfileDropdown";
 import PrimaryButton from "./PrimaryButton";
 import { FaRegEye } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
+import { useVoter } from "../context/VoterContext";
+import Paragraph from "./Paragraph";
 
-const Navbar = () => {
+const VoterNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { voterData } = useVoter();
 
   const isCurrentPath = (currentPath) => {
     return location.pathname === currentPath;
   };
-
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -76,30 +75,14 @@ const Navbar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link
-                  to="/admin/dashboard"
+                  to="/"
                   href="#"
                   className={`text-gray-500 rounded-md px-3 py-2 text-sm font-medium${
                     isCurrentPath("/admin/dashboard") ? " bg-gray-100" : ""
                   }`}
                   aria-current="page"
                 >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/admin/candidates"
-                  className={`text-gray-500 rounded-md px-3 py-2 text-sm font-medium${
-                    isCurrentPath("/admin/candidates") ? " bg-gray-100" : ""
-                  }`}
-                >
-                  Candidates
-                </Link>
-                <Link
-                  to="/admin/voters"
-                  className={`text-gray-500 rounded-md px-3 py-2 text-sm font-medium${
-                    isCurrentPath("/admin/voters") ? " bg-gray-100" : ""
-                  }`}
-                >
-                  Voters
+                  Home
                 </Link>
               </div>
             </div>
@@ -114,11 +97,7 @@ const Navbar = () => {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-3 sm:pr-0">
             <ProfileDropdown>
-              <img
-                className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
+              <Paragraph className="mx-2">{voterData.username}</Paragraph>
             </ProfileDropdown>
           </div>
         </div>
@@ -129,32 +108,14 @@ const Navbar = () => {
       >
         <div className="space-y-1 px-2 pt-2 pb-3">
           <Link
-            to="/admin/dashboard"
+            to="/"
             href="#"
             className={`text-gray-500 block rounded-md px-3 py-2 text-base font-medium ${
               isCurrentPath("/admin/dashboard") ? " bg-gray-100" : ""
             }`}
             aria-current="page"
           >
-            Dashboard
-          </Link>
-          <Link
-            to="/admin/candidates"
-            href="#"
-            className={`text-gray-500 block rounded-md px-3 py-2 text-base font-medium ${
-              isCurrentPath("/admin/candidates") ? " bg-gray-100" : ""
-            }`}
-          >
-            Candidates
-          </Link>
-          <Link
-            to="/admin/voters"
-            href="#"
-            className={`text-gray-500 block rounded-md px-3 py-2 text-base font-medium ${
-              isCurrentPath("/admin/voters") ? " bg-gray-100" : ""
-            }`}
-          >
-            Voters
+            Home
           </Link>
           <PrimaryButton
             type="submit"
@@ -168,4 +129,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default VoterNavbar;
