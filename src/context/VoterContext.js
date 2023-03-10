@@ -7,8 +7,8 @@ const VoterData = {
   username: null,
   password: null,
   isValid: false,
-  error: null
-}
+  error: null,
+};
 
 const VoterContext = createContext(VoterData);
 
@@ -18,7 +18,10 @@ function useVoter() {
 
 function VoterProvider(props) {
   const [voterData, setVoterData] = useState(VoterData);
-  const [voterDataStorage, setVoterDataStorage] = useLocalStorage("voterData", null);
+  const [voterDataStorage, setVoterDataStorage] = useLocalStorage(
+    "voterData",
+    null
+  );
 
   useEffect(() => {
     if (voterDataStorage) {
@@ -28,52 +31,55 @@ function VoterProvider(props) {
         isValid: true,
       });
     }
-  }, [])
+  }, []);
 
   const login = async ({ username, password }) => {
     try {
-      const response = await axios.post(`${API_URL}/voters/login`, { username, password }, { "Content-Type": "application/json" })
+      const response = await axios.post(
+        `${API_URL}/voters/login`,
+        { username, password },
+        { "Content-Type": "application/json" }
+      );
 
       setVoterDataStorage({
         username: response.data.data.username,
         password: response.data.data.password,
-      })
+      });
 
       setVoterData({
         username: response.data.data.username,
         password: response.data.data.password,
         isValid: true,
-        error: null
-      })
+        error: null,
+      });
     } catch (err) {
-      console.log(err.response.status)
       if (err.response.status === 401) {
         setVoterData({
           ...voterData,
-          error: "Username atau password salah"
-        })
-      } else if(err.response.status === 400) {
+          error: err.response.data.error,
+        });
+      } else if (err.response.status === 400) {
         setVoterData({
           ...voterData,
-          error: "Username atau password tidak boleh kosong"
-        })
+          error: "Username atau password tidak boleh kosong",
+        });
       } else {
         setVoterData({
           ...voterData,
-          error: "Terjadi kesalahan"
-        })
+          error: "Terjadi kesalahan",
+        });
       }
     }
-  }
+  };
 
   const logout = () => {
     setVoterDataStorage(null);
     setVoterData(VoterData);
-  }
+  };
 
   return (
     <VoterContext.Provider value={{ voterData, login, logout }} {...props} />
-  )
+  );
 }
 
-export { VoterProvider, useVoter }
+export { VoterProvider, useVoter };
