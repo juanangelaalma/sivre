@@ -9,7 +9,7 @@ import {
   Home,
   Login,
   LoginAdmin,
-  Logout,
+  Results
 } from "./pages";
 import LogoutAdmin from "./pages/Admin/LogoutAdmin";
 
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
       </AdminMiddleware>
     ),
   },
+  {
+    path: "results",
+    element: <Results />
+  }
 ]);
 
 export default router;

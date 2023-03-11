@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+g,
+path {
+  outline: none;
+}
+
 .circles {
   position: absolute;
   top: 0;

@@ -5,6 +5,7 @@ import AdminCandidates from "./Admin/Candidates";
 import AdminVoters from "./Admin/Voters";
 
 import Home from "./Home";
+import Results from "./Results"
 
 export {
   Login,
@@ -13,4 +14,5 @@ export {
   AdminCandidates,
   AdminVoters,
   Home,
+  Results
 };
