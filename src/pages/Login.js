@@ -96,7 +96,7 @@ const Login = () => {
               />
               <FormInput
                 className="content-center mt-8"
-                type="password"
+                type="text"
                 name="password"
                 placeholder="masukkan password anda"
                 label="Password"

@@ -7,7 +7,7 @@ const LogoutAdmin = () => {
 
   logout();
 
-  return <Navigate to="/" />;
+  return <Navigate to="/admin/logout" />;
 };
 
 export default LogoutAdmin;

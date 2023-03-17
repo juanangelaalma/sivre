@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProfileDropdown = ({ children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -39,15 +40,15 @@ const ProfileDropdown = ({ children }) => {
         aria-labelledby="user-menu-button"
         tabIndex={-1}
       >
-        <a
-          href="#"
+        <Link
+          to="/admin/logout"
           className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
           role="menuitem"
           tabIndex={-1}
           id="user-menu-item-2"
         >
           Sign out
-        </a>
+        </Link>
       </div>
     </div>
   );

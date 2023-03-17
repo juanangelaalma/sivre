@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CandidateCard, PrimaryButton, Spinner } from "../components";
+import { CandidateCard, LoaderButton, PrimaryButton, Spinner } from "../components";
 import VoterLayout from "../components/VoterLayout";
 import { API_URL } from "../configs/api";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -13,6 +13,7 @@ const Home = () => {
   const fetcher = useVoterFetcher();
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [buttonLoading, setButtonLoading] = useState(false);
   const [hasVoted, setHasVoted] = useLocalStorage("hasVoted", false);
   const { logout } = useVoter();
 
@@ -32,11 +33,13 @@ const Home = () => {
   };
 
   const handleVote = async () => {
+    setButtonLoading(true);
     try {
-      fetcher(`${API_URL}/candidates/${selectedCandidate?.id}/votes`, {
+      await fetcher(`${API_URL}/candidates/${selectedCandidate?.id}/votes`, {
         method: "POST",
       });
       setHasVoted(true);
+      setButtonLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -80,7 +83,7 @@ const Home = () => {
               </div>
               <div className="w-full md:w-1/4 mx-auto mt-10 mb-2 pl-4 pr-2">
                 <PrimaryButton onClick={handleVote}>
-                  Pilih Kandidat
+                {buttonLoading ? <LoaderButton /> : "Pilih Kandidat"} 
                 </PrimaryButton>
               </div>
             </>
