@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { CandidateCard, LoaderButton, PrimaryButton, Spinner } from "../components";
+import {
+  CandidateCard,
+  LoaderButton,
+  PrimaryButton,
+  Spinner,
+} from "../components";
 import VoterLayout from "../components/VoterLayout";
 import { API_URL } from "../configs/api";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -82,9 +87,18 @@ const Home = () => {
                 ))}
               </div>
               <div className="w-full md:w-1/4 mx-auto mt-10 mb-2 pl-4 pr-2">
-                <PrimaryButton onClick={handleVote}>
-                {buttonLoading ? <LoaderButton /> : "Pilih Kandidat"} 
-                </PrimaryButton>
+                {selectedCandidate ? (
+                  <PrimaryButton onClick={handleVote}>
+                    {buttonLoading ? <LoaderButton /> : "Pilih Kandidat"}
+                  </PrimaryButton>
+                ) : (
+                  <PrimaryButton
+                    onClick={() => alert("Pilih dulu kandidat")}
+                    className="bg-inherit bg-blue-200 cursor-not-allowed"
+                  >
+                    Pilih Kandidat
+                  </PrimaryButton>
+                )}
               </div>
             </>
           )}

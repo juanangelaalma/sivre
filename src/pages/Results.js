@@ -95,7 +95,6 @@ const Results = () => {
       const response = await fetcher(`${API_URL}/votes`, {
         method: "GET",
       });
-
       setResults(response.data.data);
     } catch (error) {
       console.log(error);
